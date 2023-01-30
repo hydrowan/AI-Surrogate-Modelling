@@ -54,9 +54,6 @@ def load_data(csv_path, train_factor=0.8):
 
     # Seperate out the inputs and Solubility target
     logging.debug("Splitting data and converting to tensor")
-    # TODO: This scraps periodic group as it is not numeric. It also scraps occurence as it's before group column and so is convenient
-    # We can deal with this later if we have time, then adjust input layer number or make it dynamic.
-    # Could easily change group to numeric or perhaps even number of valence shell electrons, which seems more intuitive for the model??
     train_input = train_df.iloc[:, 7:]
     test_input = train_df.iloc[:, 7:]
 
