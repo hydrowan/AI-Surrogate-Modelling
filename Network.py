@@ -18,6 +18,7 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 import numpy as np
+from torch.utils.data import Dataset, DataLoader
 
 class InvalidParameterError(Exception):
     """
@@ -39,6 +40,8 @@ class MLP(torch.nn.Module):
         self.relu = nn.ReLU()
 
     def forward(self, x):
+        print(type(x))
+        print(x.shape)
         x = self.relu(self.fc1(x))
         x = self.relu(self.fc2(x))
         x = self.fc3(x)
@@ -148,6 +151,7 @@ def main():
         # device 0: Quadro RTX 3000 with Max-Q Design
 
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    device = "cpu" #################################################################################### REMOVE THIS
     logging.debug(f'Using device {device}')
 
     model = model.to(device)
@@ -165,7 +169,7 @@ def main():
     optimiser = optim.SGD(model.parameters(),lr=lr)
 
 
-    
+
     train(model, train_input, train_aqsol, epochs, criterion, optimiser,device)
     eval(model, test_input,test_aqsol,criterion,device)
     
