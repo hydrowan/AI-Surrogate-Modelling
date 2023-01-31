@@ -157,9 +157,15 @@ def main():
     hidden_layers = 64
     epochs = 300
     lr = 0.001
+    debug = True
+
+    if debug:
+        logging_level = logging.DEBUG
+    else:
+        logging_level = logging.INFO
 
 
-    logging.basicConfig(format='%(levelname)s at %(asctime)s\n%(message)s\n', datefmt='%M:%S', level=logging.DEBUG)
+    logging.basicConfig(format='%(levelname)s at %(asctime)s\n%(message)s\n', datefmt='%M:%S', level=logging_level)
 
     # TODO: Add list of variables that feeds into load_data() so you can choose inputs to drop
     trainloader, testloader, input_layers = load_data("curated-solubility-dataset.csv",train_factor=train_factor)
