@@ -134,7 +134,9 @@ def train(model, loader, epochs,criterion,optimiser,device):
             optimiser.step()
         
         mean_epoch_loss = sum(current_epoch_losses)/len(current_epoch_losses)
-        print(f'mean_loss for epoch {epoch+1}: {mean_epoch_loss}')
+        if not epoch == 0 or not epoch == epochs:
+            print("\033[5A")
+        print(f'mean loss for epoch {epoch+1}: {mean_epoch_loss}')
         loss_list.append(mean_epoch_loss)
         # can implement save model here w torch.save(model,path) but it trains to plateu faster than model loading would take
     logging.info("Training Done")
@@ -153,7 +155,7 @@ def main():
     # Hyperparams
     train_factor = 0.8
     hidden_layers = 64
-    epochs = 1000
+    epochs = 300
     lr = 0.001
 
 
